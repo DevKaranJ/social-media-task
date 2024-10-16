@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 const errorHandler = require('./middleware/errorHandler');
 const connectDB = require('./config/db');
 
@@ -16,6 +17,7 @@ connectDB();
 // Middleware
 app.use(express.json()); // For parsing application/json
 app.use('/api/users', userRoutes); // User-related routes
+app.use('/api/admin', adminRoutes); // Admin-related route
 app.use(errorHandler); // Error handling middleware
 
 // Start the server
