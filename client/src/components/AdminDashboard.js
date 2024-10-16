@@ -7,7 +7,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/admin', {
+        const response = await fetch('https://your-service-name.onrender.com/api/admin', { // Update URL here
           headers: {
             username: 'admin',
             password: 'admin123'
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/${id}`, {
+      const response = await fetch(`https://your-service-name.onrender.com/api/admin/${id}`, { // Update URL here
         method: 'DELETE',
         headers: {
           username: 'admin',
@@ -81,7 +81,7 @@ const AdminDashboard = () => {
                   {user.images.map((image, index) => (
                     <img
                       key={index}
-                      src={`http://localhost:5000/${image}`}
+                      src={`https://your-service-name.onrender.com/${image}`} // Update URL here
                       alt="User upload"
                       width="100%"
                     />
