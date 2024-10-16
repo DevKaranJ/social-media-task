@@ -17,7 +17,7 @@ const UserForm = () => {
     }
 
     // Post the formData to the server
-    const response = await fetch('https://your-service-name.onrender.com/api/users', { // Update URL here
+    const response = await fetch('https://social-media-task-dd17.onrender.com/api/users', { // Update URL here
       method: 'POST',
       body: formData,
     });

@@ -7,7 +7,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('https://your-service-name.onrender.com/api/admin', { // Update URL here
+        const response = await fetch('https://social-media-task-dd17.onrender.com/api/admin', { // Update URL here
           headers: {
             username: 'admin',
             password: 'admin123'
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`https://your-service-name.onrender.com/api/admin/${id}`, { // Update URL here
+      const response = await fetch(`https://social-media-task-dd17.onrender.com/api/admin/${id}`, { // Update URL here
         method: 'DELETE',
         headers: {
           username: 'admin',
@@ -81,7 +81,7 @@ const AdminDashboard = () => {
                   {user.images.map((image, index) => (
                     <img
                       key={index}
-                      src={`https://your-service-name.onrender.com/${image}`} // Update URL here
+                      src={`https://social-media-task-dd17.onrender.com/${image}`} // Update URL here
                       alt="User upload"
                       width="100%"
                     />
