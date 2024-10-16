@@ -1,42 +1,13 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const User = require('./models/userModel'); // Adjust the path if needed
-const Admin = require('./models/adminModel'); // Import the admin model
-const path = require('path');
+const Admin = require('./models/adminModel');
 
 dotenv.config();
-
-// Sample data for users
-const users = [
-    {
-        name: 'John Doe',
-        socialMediaHandle: '@john_doe',
-        images: [
-            path.join(__dirname, 'uploads', 'image1.jpg'), // Adjust image names as per your uploads
-            path.join(__dirname, 'uploads', 'image2.jpg'),
-        ],
-    },
-    {
-        name: 'Jane Smith',
-        socialMediaHandle: '@jane_smith',
-        images: [
-            path.join(__dirname, 'uploads', 'image3.jpg'),
-        ],
-    },
-    {
-        name: 'Alice Johnson',
-        socialMediaHandle: '@alice_johnson',
-        images: [
-            path.join(__dirname, 'uploads', 'image4.jpg'),
-            path.join(__dirname, 'uploads', 'image5.jpg'),
-        ],
-    },
-];
 
 // Sample data for admin
 const admin = {
     username: 'admin',
-    password: 'admin123', // In a real application, make sure to hash the password
+    password: 'admin123',
 };
 
 const connectDB = async () => {
@@ -55,17 +26,13 @@ const connectDB = async () => {
 const seedDatabase = async () => {
     await connectDB();
     
-    // Clear existing data
-    await User.deleteMany({});
-    await Admin.deleteMany({}); // Clear existing admin data
+    // Clear existing admin data
+    await Admin.deleteMany({}); 
 
-    // Create demo users
-    await User.insertMany(users);
-    
     // Create demo admin
     await Admin.create(admin);
     
-    console.log('Database seeded with demo users and an admin.');
+    console.log('Database seeded with admin.');
     process.exit(); // Exit the process
 };
 
