@@ -18,7 +18,13 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 // Middleware
-app.use(cors()); // Enable CORS for all routes
+// Configure CORS
+app.use(cors({
+    origin: 'https://social-media-task-git-dev-devkaranjs-projects.vercel.app', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+    credentials: true // Enable credentials if needed
+}));
 app.use(express.json()); // For parsing application/json
 
 // Serve static files from the uploads directory
@@ -45,12 +51,21 @@ const ensureAdminExists = async () => {
     }
 };
 
-ensureAdminExists(); // Call the function to ensure the admin exists if not it can create demo admin 
+ensureAdminExists(); // Call the function to ensure the admin exists
 
 // Routes
 app.use('/api/users', userRoutes); // User-related routes
-app.use('/api/admin', adminRoutes); // Admin-related route
+app.use('/api/admin', adminRoutes); // Admin-related routes
 app.use(errorHandler); // Error handling middleware
+
+// Custom CORS Error Handling Middleware
+app.use((err, req, res, next) => {
+    if (err.name === 'CorsError') {
+        res.status(400).json({ message: 'CORS error: Access to this resource is restricted.' });
+    } else {
+        next(err);
+    }
+});
 
 // Start the server
 app.listen(PORT, () => {
