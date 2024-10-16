@@ -13,9 +13,6 @@ const validateUser = [
     body('socialMediaHandle')
         .notEmpty()
         .withMessage('Social Media Handle is required.'),
-    body('images')
-        .isArray()
-        .withMessage('At least one image is required.')
 ];
 
 // Route for creating a new user with image uploads

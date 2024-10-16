@@ -37,7 +37,7 @@ npm install
 MONGODB_URI=mongodb://your_mongo_db_uri
 PORT=5000
 ```
-4. (Optional) Seed the database with demo data:
+4. Seed the database with Admin data:
 
 ``` bash
 node seed.js
