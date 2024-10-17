@@ -17,6 +17,7 @@ const validateUser = [
 
 // Route for creating a new user with image uploads
 router.post('/', upload.array('images', 10), validateUser, createUser); // Allows up to 10 images
+
 // Route for getting all users
 router.get('/', getAllUsers);
 

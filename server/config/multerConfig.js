@@ -13,7 +13,7 @@ const mongoURI = process.env.MONGODB_URI;
 // Create storage engine for GridFS
 const storage = new GridFsStorage({
     url: mongoURI,
-    options: { useUnifiedTopology: true },
+    options: { useNewUrlParser: true },
     file: (req, file) => {
         return new Promise((resolve, reject) => {
             crypto.randomBytes(16, (err, buf) => {
@@ -23,7 +23,7 @@ const storage = new GridFsStorage({
                 const filename = buf.toString('hex') + path.extname(file.originalname);
                 const fileInfo = {
                     filename: filename,
-                    bucketName: 'uploads', // The name of the collection to store files
+                    bucketName: 'uploads',
                 };
                 resolve(fileInfo);
             });

@@ -11,13 +11,16 @@ const createUser = async (req, res) => {
     }
 
     const { name, socialMediaHandle } = req.body;
-    const images = req.files.map(file => file.id); // Store the GridFS file ID
+    
+    // Ensure req.files is defined and contains uploaded files
+    const images = req.files ? req.files.map(file => file.id) : []; // Store the GridFS file IDs
 
     try {
         const user = new User({ name, socialMediaHandle, images });
         await user.save();
         res.status(201).json(formatResponse(user));
     } catch (error) {
+        console.error('Error creating user:', error); // Log the error for debugging
         res.status(500).json(formatResponse(null, 'Failed to create user', error));
     }
 };
@@ -28,6 +31,7 @@ const getAllUsers = async (req, res) => {
         const users = await User.find();
         res.status(200).json(formatResponse(users));
     } catch (error) {
+        console.error('Error retrieving users:', error); // Log the error for debugging
         res.status(500).json(formatResponse(null, 'Failed to retrieve users', error));
     }
 };
