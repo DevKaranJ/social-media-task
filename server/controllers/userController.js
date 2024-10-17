@@ -11,7 +11,7 @@ const createUser = async (req, res) => {
     }
 
     const { name, socialMediaHandle } = req.body;
-    const images = req.files.map(file => file.path.replace(/\\/g, '/')); // Get uploaded image paths and replace backslashes with forward slashes
+    const images = req.files.map(file => file.id); // Store the GridFS file ID
 
     try {
         const user = new User({ name, socialMediaHandle, images });

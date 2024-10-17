@@ -7,6 +7,7 @@ const errorHandler = require('./middleware/errorHandler');
 const connectDB = require('./config/db');
 const path = require('path');
 const Admin = require('./models/adminModel');
+const fileRoutes = require('./routes/fileRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -56,6 +57,7 @@ ensureAdminExists(); // Call the function to ensure the admin exists
 // Routes
 app.use('/api/users', userRoutes); // User-related routes
 app.use('/api/admin', adminRoutes); // Admin-related routes
+app.use('/api/files', fileRoutes); // File-related routes
 app.use(errorHandler); // Error handling middleware
 
 // Custom CORS Error Handling Middleware

@@ -17,27 +17,33 @@ const UserForm = () => {
     }
 
     // Post the formData to the server
-    const response = await fetch('https://social-media-task-dd17.onrender.com/api/users', { // Update URL here
-      method: 'POST',
-      body: formData,
-    });
+    try {
+      const response = await fetch('https://social-media-task-dd17.onrender.com/api/users', { // Update URL here
+        method: 'POST',
+        body: formData,
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Error submitting user:', errorData);
-      alert('Failed to submit user: ' + errorData.message);
-      return;
-    }
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error submitting user:', errorData);
+        setError('Failed to submit user: ' + errorData.message);
+        return;
+      }
 
-    const data = await response.json();
-    if (data.success) {
-      alert('User submitted successfully!');
-      // Clear the form
-      setName('');
-      setSocialMediaHandle('');
-      setImages([]);
-    } else {
-      setError(data.message); // Show error if the submission fails
+      const data = await response.json();
+      if (data.success) {
+        alert('User submitted successfully!');
+        // Clear the form
+        setName('');
+        setSocialMediaHandle('');
+        setImages([]);
+        setError('');
+      } else {
+        setError(data.message);
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      setError('An error occurred. Please try again.');
     }
   };
 
@@ -70,8 +76,9 @@ const UserForm = () => {
           multiple
           onChange={(e) => setImages([...e.target.files])}
           required
+          style={{ marginTop: '10px' }}
         />
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button type="submit" variant="contained" color="primary" fullWidth style={{ marginTop: '20px' }}>
           Submit
         </Button>
         {error && <Alert severity="error" style={{ marginTop: '10px' }}>{error}</Alert>}
